@@ -52,5 +52,11 @@ jobs:
           ENV: dev
         run: |
           dotnet test --configuration Release --filter "Category=regression" --logger "trx;LogFileName=TestResults.trx"
+      - name: Install LivingDoc CLI
+        run: dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+
+      - name: Add dotnet tools to PATH
+        run: echo "${HOME}/.dotnet/tools" >> $GITHUB_PATH
+
       - name: Generate LivingDoc report
         run: livingdoc feature-folder Features
