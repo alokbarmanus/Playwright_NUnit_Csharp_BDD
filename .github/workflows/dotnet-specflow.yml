@@ -15,8 +15,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
       - name: Install Playwright Browsers
-        run: pwsh -File bin/Debug/net8.0/playwright.ps1 install
+        run: pwsh -File $(find bin/Debug -name 'playwright.ps1' | head -n 1) install
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
