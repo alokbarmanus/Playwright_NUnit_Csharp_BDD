@@ -39,11 +39,12 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
+
       - name: Build
         run: dotnet build --no-restore --configuration Release
 
       - name: Install Playwright Browsers
-        run: pwsh -File $(find bin/Debug -name 'playwright.ps1' | head -n 1) install
+        run: pwsh -File $(find bin/Release -name 'playwright.ps1' | head -n 1) install
 
       - name: Run Playwright regression tests (Edge, dev env)
         env:
