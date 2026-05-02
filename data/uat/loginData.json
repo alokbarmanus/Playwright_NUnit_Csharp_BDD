@@ -1,0 +1,12 @@
+[
+    {
+        "username": "Admin",
+        "password": "admin123",
+        "address": {
+            "street": "3 Marshall St",
+            "city": "Irvington",
+            "state": "NJ",
+            "zip": "07111"
+        }
+    }
+]

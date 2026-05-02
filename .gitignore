@@ -1,0 +1,55 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragejson
+TestResult.xml
+
+# Playwright
+.playwright/
+
+# SpecFlow
+*.feature.cs
+LivingDoc.html
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Other
+*.ncrunch*
+*.resharper*
+_ReSharper*/
+
+# Node modules (if any JS tooling)
+node_modules/
+
+# Reports
+*.html
+*.xml
+
+# Environment files
+.env
+.env.*
+
+# GitHub Actions
+.github/workflows/*.secrets.enc

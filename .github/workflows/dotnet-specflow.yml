@@ -1,0 +1,37 @@
+name: .NET Playwright SpecFlow CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test-report:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Install Playwright Browsers
+        run: pwsh bin/Debug/net8.0/playwright.ps1 install || pwsh bin/Debug/net8.0/playwright.ps1 install
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        run: dotnet test --no-build --filter "Category=regression"
+      - name: Install LivingDoc CLI
+        run: dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+      - name: Add dotnet tools to PATH
+        run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        shell: pwsh
+      - name: Generate LivingDoc
+        run: livingdoc test-assembly bin/Debug/net8.0/Playwright_NUnit_Csharp_BDD.dll
+      - name: Upload LivingDoc report
+        uses: actions/upload-artifact@v4
+        with:
+          name: LivingDoc
+          path: LivingDoc.html
