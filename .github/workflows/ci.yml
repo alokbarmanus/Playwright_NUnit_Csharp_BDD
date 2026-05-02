@@ -36,8 +36,10 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Install Playwright Browsers
-        run: pwsh -Command "npx playwright install --with-deps msedge"
+        - name: Install Playwright Browsers
+          run: |
+            dotnet build --no-restore --configuration Release
+            pwsh -File bin/Debug/net8.0/playwright.ps1 install
 
       - name: Run Playwright regression tests (Edge, dev env)
         env:
